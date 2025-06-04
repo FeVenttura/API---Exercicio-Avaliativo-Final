@@ -1,8 +1,8 @@
 const Sequelize = require('sequelize');
-const database = require('../config/db');
+const db = require('../config/db');
 const bcrypt = require('bcrypt');
 
-const User = database.define('User', {
+const User = db.define('User', {
     idUser: {
         type: Sequelize.INTEGER,
         primaryKey: true,
@@ -26,10 +26,10 @@ const User = database.define('User', {
     }
 });
 
-// Criptografar senha automaticamente antes de criar usuário
+// Criptografar senha automaticamente antes de criar o usuário
 User.beforeCreate(async (user, options) => {
     const salt = await bcrypt.genSalt(10);
-    user.senha = await bcrypt.hash(user.senha, salt);
+    user.password = await bcrypt.hash(user.password, salt);
 });
 
 module.exports = User;

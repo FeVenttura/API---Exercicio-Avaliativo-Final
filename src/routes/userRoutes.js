@@ -3,9 +3,9 @@ const router = express.Router();
 
 const userController = require('../controllers/userController');
 
-router.get('/user', userController.findAllUsers);
-router.post('/user', userController.createUsers);
-router.put('/user', userController.updateUsers);
-router.delete('/user', userController.deleteUsers);
+router.get('/', userController.findAllUsers);
+router.post('/', userController.createUsers);
+router.put('/:id', userController.updateUsers);
+router.delete('/:id', userController.deleteUsers);
 
 module.exports = router;

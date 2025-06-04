@@ -1,7 +1,7 @@
 const express = require('express');
 const database = require('./config/database');
-const userApi = require('./controllers/userController');
-const projectController = require('./controllers/projectController');
+const userRouter = require('./routes/userRoutes');
+// const projectController = require('./controllers/projectController');
 
 
 const app = express();
@@ -12,7 +12,7 @@ console.log('Starting server....');
 app.get('/', (req, res) => {
     res.send({ response: 'Hello World!' });
 });
-
+/*
 const userController = require('./controllers/userController');
 app.post('/users', userController.insert);
 app.get('/users', userController.findAll);
@@ -37,8 +37,9 @@ app.use(userApi.validarToken);
 app.get('/users', userApi.listarUsuario);
 app.put('/users/:id', userApi.alterarUsuario);
 app.delete('/users/:id', userApi.deletarUsuario);
+*/
 
-
+app.use('/user', userRouter);
 
 database.sync() 
     .then(() => {
