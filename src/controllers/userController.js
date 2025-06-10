@@ -4,11 +4,10 @@ const User = require('../models/user');
 class UserController {
     
     static async createUsers(req, res) {
-        const {idUser, name, email, password } = req.body;
-
+        const { idUser, name, email, password } = req.body;
         try {
             const senhaCriptografada = await bcrypt.hash(password, 10);
-            const user = await User.createUsers({
+            const user = await User.create({
                 idUser,
                 name,
                 email,
@@ -23,8 +22,8 @@ class UserController {
     
     static async findAllUsers(req, res) {
         try {
-            const users = await User.findAllUsers({
-                attributes: { exclude: ['senha'] } // não retornar senha
+            const users = await User.findAll({
+                attributes: { exclude: ['password'] } // Campo correto
             });
 
             res.status(200).json(users);
@@ -34,11 +33,11 @@ class UserController {
     }
     
     static async updateUsers(req, res) {
-        const { idUser } = req.params;
+        const { id } = req.params;
         const { name, email, password } = req.body;
 
         try {
-            const user = await User.findByPk(idUser);
+            const user = await User.findByPk(id);
             if (!user) {
                 return res.status(404).json({ error: 'Usuário não encontrado' });
             }
@@ -60,10 +59,10 @@ class UserController {
     }
     
     static async deleteUsers(req, res) {
-        const { idUser } = req.params;
+        const { id } = req.params;
 
         try {
-            const user = await User.findByPk(idUser);
+            const user = await User.findByPk(id);
             if (!user) {
                 return res.status(404).json({ error: 'Usuário não encontrado' });
             }

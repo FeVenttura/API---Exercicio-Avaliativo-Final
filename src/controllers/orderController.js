@@ -23,7 +23,7 @@ class OrderController {
 
   
   static async updateOrders(req, res) {
-    const { idOrder, idUser, products } = req.body;
+    const { id: idOrder, idUser, products } = req.body;
     try {
       const order = await Order.findByPk(idOrder);
       if (!order) {
@@ -42,7 +42,7 @@ class OrderController {
 
   
   static async deleteOrders(req, res) {
-    const { idOrder } = req.body;
+    const { id: idOrder } = req.body;
     try {
       const order = await Order.findByPk(idOrder);
       if (!order) {

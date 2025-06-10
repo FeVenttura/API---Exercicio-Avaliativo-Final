@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
-const database = require('../config/db');
+const db = require('../config/db');
 
-const Order = database.db.define ('Order', {
+const Order = db.define ('Order', {
     idOrder: {
         type: Sequelize.INTEGER,
         primaryKey: true,
@@ -10,10 +10,6 @@ const Order = database.db.define ('Order', {
     idUser: {
         type: Sequelize.INTEGER,
         allowNull: false,
-    },
-    products: {
-        type: Sequelize.JSON,
-        allowNull: false
     }
 });
 
