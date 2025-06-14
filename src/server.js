@@ -1,12 +1,15 @@
 const express = require('express');
 const db = require('./config/db');
 const dotenv = require('dotenv');
+const swaggerUi = require('swagger-ui-express');
+const swaggerSpecs = require('./docs/swagger');
 
 // Rotas
 const userRouter = require('./routes/userRoutes');
 const productRouter = require('./routes/productRoutes');
 const categoryRouter = require('./routes/categoryRoutes');
 const orderRouter = require('./routes/orderRoutes'); 
+const orderItemRouter = require('./routes/orderItemRoutes');
 
 
 dotenv.config(); // Carrega variáveis do .env
@@ -24,6 +27,9 @@ app.use('/user', userRouter);
 app.use('/product', productRouter);
 app.use('/category', categoryRouter);
 app.use('/order', orderRouter); 
+app.use('/orderItem', orderItemRouter);
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpecs));
 
 // Conexão e sincronização com o banco de dados
 db.sync()
